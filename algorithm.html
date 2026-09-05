@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08111f" />
+  <meta name="description" content="A complete overview of how the Study Arc adaptive study planning algorithm works." />
+  <title>Study Arc Algorithm — Complete Overview</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/mathilad/StudyArc/main/assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="site-overrides.css" />
+</head>
+<body class="algorithm-page">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Study Arc home">
+      <img class="brand-logo" src="https://raw.githubusercontent.com/mathilad/StudyArc/main/assets/images/icon.png" alt="Study Arc logo" />
+      <span>Study Arc</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="index.html">Home</a>
+      <a href="index.html#features">Features</a>
+      <a href="#priority">Priority engine</a>
+      <a href="index.html#download">Download</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main>
+    <section class="section-shell algorithm-hero reveal">
+      <div class="eyebrow">HOW STUDY ARC THINKS</div>
+      <h1>An adaptive study plan built from your real study data.</h1>
+      <p>Study Arc does not simply rotate subjects on a fixed timetable. It builds a priority queue from the topics you have covered, your knowledge, memory and performance, weak-topic test results, revision due dates, class timing, available hours and exam phase. It then fits the highest-value work into the time you actually have.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="index.html#download">Download Study Arc</a>
+        <a class="btn btn-secondary" href="#priority">See the scoring logic</a>
+      </div>
+    </section>
+
+    <section class="algo-section">
+      <div class="section-shell">
+        <div class="eyebrow">THE FULL LOOP</div>
+        <h2>From student input to tomorrow's plan.</h2>
+        <p class="algo-intro">The planner repeats the same cycle every day: collect constraints, decide what matters most, build a balanced plan, record what happened, and feed that new information back into future planning.</p>
+        <div class="logic-flow">
+          <div class="logic-step reveal"><span>01</span><div><strong>Build the student context</strong><p>Subjects, manually covered topics, wake and sleep times, self-study target, classes, protected time, exam settings, topic progress and test marks become the planner's inputs.</p></div></div>
+          <div class="logic-step reveal"><span>02</span><div><strong>Filter what is eligible</strong><p>The planner only queues topics marked as covered. In exam-focused phases it can also restrict scheduling to selected exam subjects and topics, while completed exam subjects can be removed.</p></div></div>
+          <div class="logic-step reveal"><span>03</span><div><strong>Score every eligible topic</strong><p>Knowledge, memory, performance, weak-topic hits, revision due dates and class urgency determine which topics need attention first.</p></div></div>
+          <div class="logic-step reveal"><span>04</span><div><strong>Balance subjects</strong><p>The engine avoids letting one weak topic consume the whole timetable. Weekly targets and already allocated minutes are used to keep subject buckets balanced.</p></div></div>
+          <div class="logic-step reveal"><span>05</span><div><strong>Fit sessions into the real day</strong><p>Classes, travel, pre-class review, protected time, meals, sleep and routine blocks are placed first. Study fills the usable gaps.</p></div></div>
+          <div class="logic-step reveal"><span>06</span><div><strong>Learn from the result</strong><p>Study sessions, test marks and topic progress update the data used by the next plan, creating a continuous feedback loop.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="algo-section" id="priority">
+      <div class="section-shell">
+        <div class="eyebrow">PRIORITY ENGINE</div>
+        <h2>Weakness is measured, then adjusted by urgency.</h2>
+        <p class="algo-intro">Study Arc uses a lower-is-more-urgent score. A topic with weaker progress, repeated weak-topic marks, a due revision or an approaching class receives a lower score and moves toward the front of the study queue.</p>
+        <div class="score-box reveal">
+          <code>Normal topics: base score = 35% knowledge + 35% memory + 30% performance</code>
+          <code>Biology: base score = 25% knowledge + 50% memory + 25% performance</code>
+          <code>Weak-topic penalty = up to 36 points</code>
+          <code>Revision due penalty = 20 points (28 for Biology)</code>
+          <code>Recent class-topic focus = 30 additional priority points</code>
+        </div>
+        <table class="priority-table reveal">
+          <thead><tr><th>Signal</th><th>What the planner does</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td>Low knowledge / memory / performance</td><td>Lowers the topic score</td><td>Weak understanding or recall becomes more likely to be scheduled.</td></tr>
+            <tr><td>Topic marked weak in tests</td><td>Subtracts 12 points per hit, capped at 36</td><td>Repeated mistakes receive increasingly strong attention.</td></tr>
+            <tr><td>Revision is due</td><td>Subtracts a due penalty</td><td>Previously studied material returns instead of disappearing from the plan.</td></tr>
+            <tr><td>Current/recent class topic</td><td>Strong priority boost</td><td>The timetable stays aligned with what the student is actively learning in class.</td></tr>
+            <tr><td>Class within 7 days</td><td>Adds urgency</td><td>Preparation happens before the class rather than after it.</td></tr>
+            <tr><td>Paper class within 2 days</td><td>Adds extra urgency</td><td>Paper preparation gets a stronger short-term boost.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="algo-section">
+      <div class="section-shell">
+        <div class="eyebrow">BALANCE + FAIRNESS</div>
+        <h2>The weakest topic does not get the entire week.</h2>
+        <div class="overview-grid">
+          <article class="detail-card reveal"><h3>Subject buckets</h3><p>Study Arc groups work into subject buckets and compares each bucket's target minutes with the time already allocated.</p></article>
+          <article class="detail-card reveal"><h3>Mathematics balance</h3><p>Pure Mathematics and Applied Mathematics can be treated as one Mathematics planning bucket for weekly balance.</p></article>
+          <article class="detail-card reveal"><h3>Weekly target</h3><p>The planner starts from the student's self-study-hours target and distributes time across active subject buckets.</p></article>
+          <article class="detail-card reveal"><h3>Manual adjustments</h3><p>Weekly subject adjustments can increase or reduce how much time a bucket is expected to receive.</p></article>
+          <article class="detail-card reveal"><h3>Repeat penalty</h3><p>When the same topic is selected repeatedly, its temporary usage penalty grows so another useful topic can enter the plan.</p></article>
+          <article class="detail-card reveal"><h3>Covered topics only</h3><p>The automatic weakness queue uses topics explicitly marked as covered, preventing the planner from assigning untouched content as revision.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="algo-section">
+      <div class="section-shell">
+        <div class="eyebrow">REAL-LIFE SCHEDULING</div>
+        <h2>The timetable is built around the day, not on top of it.</h2>
+        <div class="overview-grid">
+          <article class="detail-card wide-card reveal"><h3>Fixed time is protected first</h3><p>Wake routine, lunch, dinner, wind-down, classes and protected-time blocks are inserted before self-study. Physical classes can also include travel buffers, and classes can add targeted pre-review.</p></article>
+          <article class="detail-card reveal"><h3>Missed classes</h3><p>A class marked missed is removed from that week's fixed schedule.</p></article>
+          <article class="detail-card reveal"><h3>Rescheduled classes</h3><p>A replacement date and time can be inserted into the plan as a make-up class.</p></article>
+          <article class="detail-card reveal"><h3>Sleep-aware planning</h3><p>Changing wake or sleep time changes the available planning window, so future schedules adapt without changing academic priorities.</p></article>
+          <article class="detail-card reveal"><h3>Study target</h3><p>The normal target is based on the user's configured self-study hours, constrained by the real available day.</p></article>
+          <article class="detail-card reveal"><h3>Exam-month intensity</h3><p>Exam Month increases the academic target significantly and can count class time toward that total.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="algo-section">
+      <div class="section-shell">
+        <div class="eyebrow">STUDY PHASES</div>
+        <h2>The algorithm changes as the exam approaches.</h2>
+        <p class="algo-intro">The built-in phase suggestion uses the number of days remaining until the exam window. Each phase changes the planner's emphasis rather than replacing the entire scheduling system.</p>
+        <div class="phase-timeline">
+          <div class="phase-row reveal"><strong>Foundation</strong><p>Build coverage and steady study habits.</p><span>More than 180 days</span></div>
+          <div class="phase-row reveal"><strong>Strengthening</strong><p>Reinforce covered lessons and weak areas.</p><span>121–180 days</span></div>
+          <div class="phase-row reveal"><strong>Paper Practice</strong><p>Increase timed questions, MCQ and essay work.</p><span>76–120 days</span></div>
+          <div class="phase-row reveal"><strong>Main Exam Preparation</strong><p>Focus on selected subjects and topics for the next major exam.</p><span>31–75 days</span></div>
+          <div class="phase-row reveal"><strong>Exam Month</strong><p>Final exam mode; subjects already completed can be removed from scheduling.</p><span>30 days or less</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="algo-section">
+      <div class="section-shell">
+        <div class="eyebrow">READINESS, NOT GRADE PREDICTION</div>
+        <h2>Study Arc is designed to show preparation, not promise a grade.</h2>
+        <p class="algo-intro">A useful study system should tell students what is ready and what still needs work. Readiness can be expressed through signals such as syllabus coverage, paper practice, revision consistency and weak-topic recovery rather than claiming that a student will definitely receive a particular grade.</p>
+        <div class="callout reveal"><h3>The goal</h3><p>Turn study history into a clear next action: what to revise, what to practise, when to do it, and why that task deserves attention now.</p></div>
+      </div>
+    </section>
+
+    <section class="algo-section">
+      <div class="section-shell">
+        <div class="eyebrow">FEEDBACK LOOP</div>
+        <h2>Every useful action should improve the next plan.</h2>
+        <div class="overview-grid">
+          <article class="detail-card reveal"><h3>Study sessions</h3><p>Completed work adds real study history and progress data instead of relying only on planned time.</p></article>
+          <article class="detail-card reveal"><h3>Test results</h3><p>When the student identifies weak topics after a test, those topics receive stronger scheduling priority.</p></article>
+          <article class="detail-card reveal"><h3>Revision due dates</h3><p>Topics with a due recall date move upward again, supporting spaced revision.</p></article>
+          <article class="detail-card reveal"><h3>Class changes</h3><p>Missed, rescheduled and current class-topic information changes the near-term timetable.</p></article>
+          <article class="detail-card reveal"><h3>Exam progress</h3><p>Exam subjects and topics can narrow the queue during high-focus phases.</p></article>
+          <article class="detail-card reveal"><h3>New plan</h3><p>The next generated timetable uses the updated state, closing the loop between planning and actual performance.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell algo-cta">
+      <div class="algo-cta-card reveal">
+        <div><h2>Ready to use the planner?</h2><p>Download the Android app and start building your Study Arc.</p></div>
+        <a class="btn btn-primary" href="https://github.com/mathilad/StudyArc/releases/download/v1.1.1/StudyArc-v1.1.1.apk">Download Study Arc</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="index.html"><img class="brand-logo" src="https://raw.githubusercontent.com/mathilad/StudyArc/main/assets/images/icon.png" alt="Study Arc logo" /><span>Study Arc</span></a>
+    <p>Adaptive study planning built around real student constraints and progress.</p>
+    <div class="footer-links"><a href="index.html">Home</a><a href="index.html#download">Download</a><a href="https://buymeacoffee.com/mathiladinimuthu" target="_blank" rel="noopener">Support the Developer</a></div>
+    <small>© <span id="year"></span> Study Arc. All rights reserved.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
