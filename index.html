@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08111f" />
+  <meta name="description" content="Study Arc — adaptive study planning, focus sessions, progress tracking and exam preparation in one app." />
+  <title>Study Arc — Study Smarter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Study Arc home">
+      <span class="brand-mark">S</span>
+      <span>Study Arc</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#features">Features</a>
+      <a href="#algorithm">How it works</a>
+      <a href="#phases">Study phases</a>
+      <a href="#download">Download</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false">☰</button>
+  </header>
+
+  <main id="top">
+    <section class="hero section-shell">
+      <div class="hero-copy reveal">
+        <div class="eyebrow">BUILT FOR SERIOUS STUDY</div>
+        <h1>Study smarter.<br><span>Stay consistent.</span><br>Reach your goal.</h1>
+        <p class="hero-text">Study Arc turns your subjects, available time, weak topics, test results and study history into a focused daily plan that adapts with you.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#download">Download Study Arc</a>
+          <a class="btn btn-secondary" href="#algorithm">See how it works</a>
+        </div>
+        <div class="trust-row">
+          <span>✓ Adaptive timetable</span>
+          <span>✓ Focus timer</span>
+          <span>✓ Progress tracking</span>
+        </div>
+      </div>
+
+      <div class="dashboard-card reveal" aria-label="Study Arc dashboard preview">
+        <div class="preview-top">
+          <div>
+            <small>GOOD EVENING</small>
+            <strong>Ready to focus?</strong>
+          </div>
+          <div class="avatar">SA</div>
+        </div>
+        <div class="metric-grid">
+          <article><span>Studied today</span><strong>2h 42m</strong><small>+34m from yesterday</small></article>
+          <article><span>Current streak</span><strong>8 days</strong><small>Keep it going</small></article>
+        </div>
+        <div class="today-plan">
+          <div class="section-title"><strong>Today's plan</strong><span>3 sessions</span></div>
+          <div class="session active"><i></i><div><strong>Physics</strong><small>Mechanics revision</small></div><b>50 min</b></div>
+          <div class="session"><i></i><div><strong>Chemistry</strong><small>Organic questions</small></div><b>45 min</b></div>
+          <div class="session"><i></i><div><strong>Pure Maths</strong><small>Functions practice</small></div><b>40 min</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-strip">
+      <div><strong>1</strong><span>adaptive plan</span></div>
+      <div><strong>4</strong><span>core subjects</span></div>
+      <div><strong>24/7</strong><span>progress visibility</span></div>
+      <div><strong>∞</strong><span>room to improve</span></div>
+    </section>
+
+    <section class="section-shell content-section" id="features">
+      <div class="section-heading reveal">
+        <div class="eyebrow">EVERYTHING IN ONE PLACE</div>
+        <h2>Built around the way you actually study.</h2>
+        <p>Study Arc is more than a timetable. Your plan changes based on what you study, where you struggle, and how close you are to important tests and exams.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card reveal"><div class="icon">⌁</div><h3>Adaptive Timetable</h3><p>Plans study sessions around your classes, sleep schedule, available time and current priorities.</p></article>
+        <article class="feature-card reveal"><div class="icon">◴</div><h3>Focused Study Timer</h3><p>Track real study time with a clean stopwatch, laps and subject-based session history.</p></article>
+        <article class="feature-card reveal"><div class="icon">↗</div><h3>Weak Topic Detection</h3><p>Test results and practice performance push weaker areas higher in your future study plan.</p></article>
+        <article class="feature-card reveal"><div class="icon">◎</div><h3>Progress Tracking</h3><p>See studied dates, completed sessions, time spent and consistency without unnecessary clutter.</p></article>
+        <article class="feature-card reveal"><div class="icon">↻</div><h3>Smart Revision</h3><p>Previously studied topics return at useful intervals so revision becomes part of the plan.</p></article>
+        <article class="feature-card reveal"><div class="icon">◇</div><h3>Exam Preparation</h3><p>As exams approach, Study Arc gradually shifts the balance toward revision and past-paper work.</p></article>
+      </div>
+    </section>
+
+    <section class="algorithm-wrap" id="algorithm">
+      <div class="section-shell algorithm-grid">
+        <div class="section-heading reveal">
+          <div class="eyebrow">THE STUDY ARC ENGINE</div>
+          <h2>Your study plan should respond to you.</h2>
+          <p>The app combines your available time, covered topics, class schedule, study history, test performance and exam distance to decide what deserves attention next.</p>
+          <div class="formula">Priority = weakness + urgency + revision need + practice performance</div>
+        </div>
+        <div class="flow-card reveal">
+          <div class="flow-node"><span>01</span><div><strong>Your inputs</strong><small>Subjects · classes · sleep · covered topics</small></div></div>
+          <b>↓</b>
+          <div class="flow-node accent"><span>02</span><div><strong>Priority engine</strong><small>Scores what needs your attention most</small></div></div>
+          <b>↓</b>
+          <div class="flow-node"><span>03</span><div><strong>Daily plan</strong><small>Fits sessions into your real available time</small></div></div>
+          <b>↓</b>
+          <div class="flow-node"><span>04</span><div><strong>Feedback loop</strong><small>Your results update tomorrow's priorities</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-shell content-section" id="phases">
+      <div class="section-heading reveal">
+        <div class="eyebrow">YOUR JOURNEY CHANGES</div>
+        <h2>Different phases. One clear direction.</h2>
+        <p>Study Arc can shift the timetable as your academic year progresses, giving more weight to the work that matters in each stage.</p>
+      </div>
+      <div class="phase-grid">
+        <article class="phase-card reveal"><span>01</span><h3>Foundation</h3><p>Build understanding, complete tutes and establish consistent study habits.</p></article>
+        <article class="phase-card reveal"><span>02</span><h3>Test Preparation</h3><p>Increase practice around upcoming tests and the topics you perform poorly in.</p></article>
+        <article class="phase-card reveal"><span>03</span><h3>Revision</h3><p>Rotate through covered content with targeted revision and topic-based papers.</p></article>
+        <article class="phase-card reveal"><span>04</span><h3>Final Exam</h3><p>Prioritize timed past papers, error correction and high-value weak areas.</p></article>
+      </div>
+    </section>
+
+    <section class="download-section" id="download">
+      <div class="download-card reveal">
+        <div>
+          <div class="eyebrow">START YOUR STUDY ARC</div>
+          <h2>Make every study session count.</h2>
+          <p>Download Study Arc for Android. The official APK will be available through the Study Arc GitHub Releases page.</p>
+          <div class="download-actions">
+            <a class="btn btn-primary" href="https://github.com/mathilad/StudyArc/releases" target="_blank" rel="noopener">Download for Android</a>
+            <a class="btn btn-secondary" href="https://github.com/mathilad/StudyArc" target="_blank" rel="noopener">View on GitHub</a>
+          </div>
+          <small class="download-note">APK download will appear when the first app release is published.</small>
+        </div>
+        <div class="phone">
+          <div class="phone-screen">
+            <div class="phone-logo">S</div>
+            <strong>Study Arc</strong>
+            <span>Plan. Focus. Improve.</span>
+            <div class="mini-progress"><i></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="support section-shell">
+      <div class="support-card reveal">
+        <div><span class="coffee">☕</span><div><h3>Support the Developer</h3><p>If Study Arc helps you, you can support its continued development.</p></div></div>
+        <a class="btn btn-secondary" href="https://buymeacoffee.com/" target="_blank" rel="noopener">Support the Developer</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand" href="#top"><span class="brand-mark">S</span><span>Study Arc</span></a>
+    <p>Built to help students plan better, focus longer and improve consistently.</p>
+    <div class="footer-links"><a href="#features">Features</a><a href="#algorithm">Algorithm</a><a href="#download">Download</a><a href="https://github.com/mathilad/StudyArc" target="_blank" rel="noopener">GitHub</a></div>
+    <small>© <span id="year"></span> Study Arc. All rights reserved.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
