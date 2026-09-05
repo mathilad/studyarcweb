@@ -24,4 +24,15 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach((element) => observer.observe(element));
 
-document.getElementById('year').textContent = new Date().getFullYear();
+// Keep the public download action on the Study Arc website. Cloudflare Pages
+// handles /download-app and redirects straight to the APK file asset, so users
+// never have to visit a GitHub repository or release page.
+document.querySelectorAll('a[href*="StudyArc-v1.1.1.apk"]').forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+    window.location.assign('/download-app');
+  });
+});
+
+const year = document.getElementById('year');
+if (year) year.textContent = new Date().getFullYear();
