@@ -1,0 +1,36 @@
+name: Publish Study Arc v1.0.5 download
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish-app.yml]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-studyarc-v1.0.5
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Download the successful v1.0.5 build
+        run: gh run download 34012230910 --repo mathilad/StudyArc --name StudyArc-v1.0.5-APK --dir apk
+      - name: Verify APK version
+        run: |
+          test -s apk/StudyArc-v1.0.5.apk
+          AAPT=$(find "$ANDROID_HOME/build-tools" -name aapt -type f | sort -V | tail -n 1)
+          "$AAPT" dump badging apk/StudyArc-v1.0.5.apk | head -n 1 | grep "versionName='1.0.5'"
+      - name: Publish the permanent app download
+        run: |
+          if gh release view v1.0.5 >/dev/null 2>&1; then
+            gh release view v1.0.5 --json assets --jq '.assets[].name' | grep -Fx 'StudyArc-v1.0.5.apk'
+          else
+            gh release create v1.0.5 apk/StudyArc-v1.0.5.apk --target "$GITHUB_SHA" --title 'Study Arc v1.0.5' --notes 'Study Arc Android v1.0.5. Original APK from the successful StudyArc build 34012230910.'
+          fi
