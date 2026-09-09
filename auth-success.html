@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#08111f" />
+  <meta name="description" content="Study Arc authentication completed successfully." />
+  <title>Successfully logged in — Study Arc</title>
+  <link rel="icon" href="https://raw.githubusercontent.com/mathilad/StudyArc/main/assets/images/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --panel: #0e1826;
+      --panel-2: #111d2d;
+      --border: #25354a;
+      --text: #f4f7fb;
+      --muted: #8d9aae;
+      --accent: #b784ff;
+      --accent-strong: #9d61ef;
+      --success: #85d5a8;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at 50% -15%, rgba(183,132,255,.20), transparent 38%),
+        linear-gradient(180deg, #0b1422 0%, var(--bg) 52%, #060c15 100%);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .card {
+      width: min(100%, 480px);
+      padding: 32px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: rgba(14, 24, 38, .96);
+      box-shadow: 0 28px 80px rgba(0,0,0,.38);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 30px;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .brand img {
+      width: 42px;
+      height: 42px;
+      border-radius: 13px;
+      object-fit: cover;
+    }
+
+    .success-icon {
+      width: 72px;
+      height: 72px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 20px;
+      border: 1px solid rgba(133,213,168,.34);
+      border-radius: 22px;
+      background: rgba(133,213,168,.10);
+      color: var(--success);
+      font-size: 34px;
+      font-weight: 800;
+    }
+
+    .eyebrow {
+      margin-bottom: 9px;
+      color: var(--success);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.35px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 7vw, 40px);
+      line-height: 1.08;
+      letter-spacing: -1.1px;
+    }
+
+    .message {
+      margin: 13px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .primary {
+      width: 100%;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 27px;
+      padding: 0 20px;
+      border: 0;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #150a20;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      cursor: pointer;
+    }
+
+    .primary:hover { filter: brightness(1.05); }
+    .primary:active { transform: translateY(1px); }
+
+    .fallback {
+      margin-top: 11px;
+      text-align: center;
+      color: #718097;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .status {
+      display: none;
+      margin-top: 18px;
+      padding: 13px 14px;
+      border: 1px solid #27374b;
+      border-radius: 14px;
+      background: var(--panel-2);
+      color: #9aa8bb;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .status.visible { display: block; }
+
+    .site-link {
+      display: inline-block;
+      margin-top: 21px;
+      color: #9ca8b9;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .site-link:hover { color: #d8deea; }
+
+    @media (max-width: 520px) {
+      body { padding: 16px; }
+      .card { padding: 25px 21px; border-radius: 23px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <div class="brand">
+      <img src="https://raw.githubusercontent.com/mathilad/StudyArc/main/assets/images/icon.png" alt="Study Arc logo" />
+      <span>Study Arc</span>
+    </div>
+
+    <div class="success-icon" aria-hidden="true">✓</div>
+    <div class="eyebrow" id="eyebrow">AUTHENTICATION COMPLETE</div>
+    <h1 id="title">Successfully logged in.</h1>
+    <p class="message" id="message">Your Study Arc account is ready. Return to Study Arc when you are ready to continue.</p>
+
+    <button class="primary" id="returnButton" type="button">RETURN TO STUDY ARC</button>
+    <p class="fallback">We’ll try to open the Study Arc app first. If it isn’t available on this device, you’ll be taken to the Study Arc web app instead.</p>
+    <div class="status" id="status" role="status" aria-live="polite"></div>
+
+    <a class="site-link" href="./">← Back to Study Arc website</a>
+  </main>
+
+  <script>
+    (function () {
+      var APP_SCHEME = 'studyarc://';
+      var WEB_APP = 'https://mathilad.github.io/StudyArc/';
+      var params = new URLSearchParams(window.location.search);
+      var target = params.get('target') === 'reset-password' ? 'reset-password' : 'login';
+      var flow = params.get('auth_flow') || '';
+
+      if (flow === 'signup') {
+        document.getElementById('eyebrow').textContent = 'EMAIL CONFIRMED';
+        document.getElementById('title').textContent = 'Your account is confirmed.';
+        document.getElementById('message').textContent = 'Your email was verified successfully. Return to Study Arc and sign in to continue.';
+      } else if (flow === 'recovery' || target === 'reset-password') {
+        document.getElementById('eyebrow').textContent = 'SECURE LINK READY';
+        document.getElementById('title').textContent = 'Continue your password reset.';
+        document.getElementById('message').textContent = 'Your secure recovery link is ready. Return to Study Arc to choose your new password.';
+      }
+
+      function forwardedParams() {
+        var copy = new URLSearchParams(window.location.search);
+        copy.delete('target');
+        return copy.toString();
+      }
+
+      function buildDeepLink() {
+        var query = forwardedParams();
+        return APP_SCHEME + target + (query ? '?' + query : '') + (window.location.hash || '');
+      }
+
+      function buildWebFallback() {
+        var query = forwardedParams();
+        if (target === 'reset-password') {
+          return WEB_APP + 'reset-password' + (query ? '?' + query : '') + (window.location.hash || '');
+        }
+        return WEB_APP + (query ? '?' + query : '') + (window.location.hash || '');
+      }
+
+      var button = document.getElementById('returnButton');
+      var status = document.getElementById('status');
+
+      button.addEventListener('click', function () {
+        var leftPage = false;
+        var fallbackTimer;
+
+        function markOpened() {
+          leftPage = true;
+          if (fallbackTimer) clearTimeout(fallbackTimer);
+        }
+
+        window.addEventListener('blur', markOpened, { once: true });
+        document.addEventListener('visibilitychange', function () {
+          if (document.hidden) markOpened();
+        }, { once: true });
+
+        status.textContent = 'Opening the Study Arc app…';
+        status.classList.add('visible');
+
+        fallbackTimer = setTimeout(function () {
+          if (leftPage) return;
+          status.textContent = 'Study Arc app was not detected. Opening the web app…';
+          window.location.replace(buildWebFallback());
+        }, 1500);
+
+        window.location.href = buildDeepLink();
+      });
+    })();
+  </script>
+</body>
+</html>
